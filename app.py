@@ -22,17 +22,16 @@ col1, col2 = st.columns(2)
 with col1:
 hrv = st.number_input("Heart Rate Variability (HRV Score)", min_value=10, max_value=200, value=65, step=1, help="Your morning waking HRV score.")
 rhr_drift = st.slider("Resting Heart Rate (RHR) Drift", min_value=-10, max_value=15, value=0, step=1, help="How many BPM higher (+) or lower (-) your waking RHR is compared to your 30-day baseline.")
+
 with col2:
 sleep_debt = st.slider("Sleep Debt (Hours Short)", min_value=0.0, max_value=6.0, value=0.0, step=0.5, help="How many hours of sleep you are short from your ideal night.")
 st.markdown("<br>", unsafe_allow_html=True)
 # --- EXECUTION BUTTON ---
-if st.button("Execute 3-Matrix Engine",
-use_container_width=True):
-# --- INTERNAL DETERMINISTIC LOGIC ENGINE ---
-# Matrix 1: Clinical Constraints /
-Safety Verification
-matrix_1_status = "PASS"
-safety_warnings = []
-hr_cap_modifier = 0
-if rhr_drift >= 7:
-matrix_1_status = "CRITICAL WARNING"
+if st.button("Execute 3-Matrix Engine",use_container_width=True):
+  # --- INTERNAL DETERMINISTIC LOGIC ENGINE ---
+  # Matrix 1: Clinical Constraints / Safety Verification
+  matrix_1_status = "PASS"
+  safety_warnings = []
+  hr_cap_modifier = 0
+  if rhr_drift >= 7:
+  matrix_1_status = "CRITICAL WARNING"
