@@ -27,7 +27,8 @@ with col2:
 sleep_debt = st.slider("Sleep Debt (Hours Short)", min_value=0.0, max_value=6.0, value=0.0, step=0.5, help="How many hours of sleep you are short from your ideal night.")
 st.markdown("<br>", unsafe_allow_html=True)
 # --- EXECUTION BUTTON ---
-if st.button("Execute 3-Matrix Engine",use_container_width=True):
+if st.button("Execute 3-Matrix Engine",use_container_width=True):  
+  
   # --- INTERNAL DETERMINISTIC LOGIC ENGINE ---
   # Matrix 1: Clinical Constraints / Safety Verification
   matrix_1_status = "PASS"
