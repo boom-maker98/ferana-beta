@@ -21,7 +21,6 @@ col1, col2 = st.columns(2)
 hrv = col1.number_input("Heart Rate Variability (HRV Score)", min_value=10, max_value=200, value=65, step=1, help="Your morning waking HRV score.")
 rhr_drift = col1.slider("Resting Heart Rate (RHR) Drift", min_value=-10, max_value=15, value=0, step=1, help="How many BPM higher (+) or lower (-) your waking RHR is compared to your 30-day baseline.")
 sleep_debt = col2.slider("Sleep Debt (Hours Short)", min_value=0.0, max_value=6.0, value=0.0, step=0.5, help="How many hours of sleep you are short from your ideal night.")
-cycle_phase = col2.selectbox("Cycle phase (optional)", ["Not tracking", "Menstrual", "Follicular", "Ovulatory", "Luteal"], help="Optional. Not saved anywhere.")
 st.markdown("<br>", unsafe_allow_html=True)
 run_engine = st.button("Execute 3-Matrix Engine", type="primary")
 st.caption("Prototype for testing only. Not medical advice. Nothing you enter is saved.")
@@ -88,14 +87,6 @@ adjust_notes = [msg for flag, msg in [
 (hrv < 40, "Lower HRV shifts today's routine toward nervous system support."),
 ] if flag]
 
-phase_notes = {
-"Not tracking": "",
-"Menstrual": "Some people find gentle hip and lower-back release especially welcome in this phase.",
-"Follicular": "Many people feel energized in this phase, so Chapter II can feel extra good.",
-"Ovulatory": "Take the full warm-up in Chapter II before the harder efforts.",
-"Luteal": "Some people sleep lighter late in this phase, so Chapter III may help.",
-}
-
 # --- RESULTS ---
 st.markdown("---")
 st.markdown("### " + ("Morning, " + name.strip() + "." if name.strip() else "Good morning."))
@@ -116,7 +107,6 @@ _ = [st.expander(t + " · " + str(sum(x[1] for x in ch)) + " min · " + theme, e
 st.markdown("**Chapter II heart rate ceiling:** " + hr_ceiling)
 
 if adjust_notes: st.markdown("**Personalized for you today**\n\n" + "\n".join("- " + n for n in adjust_notes))
-if cycle_phase != "Not tracking": st.caption("Cycle note (" + cycle_phase + "): " + phase_notes[cycle_phase])
 st.caption("Why this routine: HRV " + str(hrv) + ", RHR drift " + str(rhr_drift) + " BPM, sleep debt " + str(sleep_debt) + " h gives a resilience score of " + str(resilience) + " (" + tier_name + ").")
 
 # --- STEP 3: RESILIENCE TREND (OPTIONAL) ---
